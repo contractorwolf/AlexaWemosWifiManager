@@ -80,6 +80,7 @@ void setup() {
   fauxmo.enable(true);
   
   fauxmo.onSetState([](unsigned char device_id, const char * device_name, bool state, unsigned char value) {
+    // cant do any delays in here, fyi
     Serial.println("SetState() called");
     Serial.printf("[MAIN] Device #%d (%s) state: %s\n", device_id, device_name, state ? "ON" : "OFF");
     
@@ -91,17 +92,6 @@ void setup() {
       }else{
         digitalWrite(OUTPUTPIN, LOW);
       }
-
-      // flash onboard led
-      digitalWrite(BUILTIN_LED, HIGH);
-      delay(200);
-      digitalWrite(BUILTIN_LED, LOW);
-      delay(200);
-      digitalWrite(BUILTIN_LED, HIGH);
-      delay(200);
-      digitalWrite(BUILTIN_LED, LOW);
-      // remove later
-      
     }else{
       Serial.println("unknown device");
     }
